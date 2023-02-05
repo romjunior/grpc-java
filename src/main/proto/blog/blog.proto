@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package blog;
+
+option java_package = "com.exemplo.blog";
+option java_multiple_files = true;
+
+message Blog {
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
+}
+
+message ReadBlogRequest {
+  string blog_id = 1;
+}
+
+message DeleteBlogEntity {
+  string blog_id = 1;
+}
+
+message ListBlogRequest {
+
+}
+
+service BlogService {
+  rpc CreateBlog(Blog) returns (Blog) {};
+  //Retorna NOT_FOUND se não encontrar
+  rpc ReadBlog(ReadBlogRequest) returns (Blog) {};
+  rpc UpdateBlog(Blog) returns (Blog) {}
+  rpc DeleteBlog(DeleteBlogEntity) returns (DeleteBlogEntity) {}
+  rpc ListBlog(ListBlogRequest) returns (stream Blog) {}
+}
